@@ -1,22 +1,20 @@
-.array-container{
-    position: relative;
-    top: 115px;
+.array-container {
+  position: relative;
+  top: 115px;
 }
 
 .array-bar {
-    display: inline-block;
-    margin: 0 1px;
+  display: inline-block;
+  margin: 0 1px;
 }
 
-.menu-items{
-    position: relative;
-    top: 115px;
+.menu-items {
+  position: relative;
+  top: 115px;
 }
 
 .bar-count-slider {
-
 }
 
 .timer-slider {
-    
 }

@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import SortingVisualizer from "./Visualizer/SortingVisualizer/SortingVisualizer";
 import ClippedDrawer from './components/NavigationBar';
 import './App.css';
-
+import Typography from '@material-ui/core/Typography';
 
 class App extends Component{
   render() {

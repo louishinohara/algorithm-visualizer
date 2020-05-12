@@ -1,13 +1,10 @@
 import React from 'react';
 import './SortingVisualizer.css';
-import { getMergeSortAnimations } from './sortingAlgorithms/sortingAlgorithms.js';
-
-// Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 1;
-
-// Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 310;
-
+import { getMergeSortAnimations } from './sortingAlgorithms/mergeSort.js';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
+import MergeTypeIcon from '@material-ui/icons/MergeType';
 // This is the main color of the array bars.
 const PRIMARY_COLOR = 'turquoise';
 
@@ -18,7 +15,9 @@ export default class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            array: []
+            array: [],
+            ANIMATION_SPEED_MS: 1,
+            NUMBER_OF_ARRAY_BARS: 280   // Change this value for the number of bars (value) in the array.
         };
    }
 
@@ -27,11 +26,13 @@ export default class SortingVisualizer extends React.Component {
         this.resetArray();
     }
 
+
+
 // Function to clear array values and fill it will 100 random numbers
 // Includes duplicate values
     resetArray() {
         const array = [];
-        for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
+        for (let i = 0; i < this.state.NUMBER_OF_ARRAY_BARS; i++) {
         array.push(randomIntFromInterval(5, 730));
         }
         this.setState({array});
@@ -50,59 +51,56 @@ export default class SortingVisualizer extends React.Component {
             setTimeout(() => {
             barOneStyle.backgroundColor = color;
             barTwoStyle.backgroundColor = color;
-            }, i * ANIMATION_SPEED_MS);
+            }, i * this.state.ANIMATION_SPEED_MS);
         } else {
             setTimeout(() => {
             const [barOneIdx, newHeight] = animations[i];
             const barOneStyle = arrayBars[barOneIdx].style;
             barOneStyle.height = `${newHeight}px`;
-            }, i * ANIMATION_SPEED_MS);
+            }, i * this.state.ANIMATION_SPEED_MS);
         }
         }
     }
-
-    quickSort() {}
-
-    heapSort() {}
-
-    bubbleSort() {}
-
-    // NOTE: This method will only work if your sorting algorithms actually return
-    // the sorted arrays; if they return the animations (as they currently do), then
-    // this method will be broken.
-    testSortingAlgorithms() {
-        for (let i = 0; i < 100; i++) {
-        const array = [];
-        const length = randomIntFromInterval(1, 1000);
-        for (let i = 0; i < length; i++) {
-            array.push(randomIntFromInterval(-1000, 1000));
-        }
-        const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
-        const mergeSortedArray = getMergeSortAnimations(array.slice());
-        console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
-        }
-    }
-
 
     render() {
         const {array} = this.state;
+        // const classes = useStyles();
         return (
-            <div className="array-container"> 
-                    {array.map((value,idx) => (
-                <div 
-                    className = "array-bar" 
-                    key={idx}                 
-                    style={{
-                        backgroundColor: PRIMARY_COLOR,
-                        height: `${value}px` 
-                            }}></div>   
-                ))}
-                <button onClick={() => this.resetArray()}> Generate New Array </button>
-                <button onClick={() => this.mergeSort()}> Merge Sort </button>
-                <button onClick={() => this.quickSort()}> Quick Sort</button>
-                <button onClick={() => this.heapSort()}> Heap Sort </button>
-                <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
-                {/* <button onClick={() => this.testSortingAlgorithms()}> Test Algorithm</button> */}
+            <div>
+                <div className="array-container"> 
+                        {array.map((value,idx) => (
+                    <div 
+                        className = "array-bar" 
+                        key={idx}                 
+                        style={{
+                            backgroundColor: PRIMARY_COLOR,
+                            height: `${value}px` 
+                                }}></div>   
+                    ))}
+                </div>
+                <div className = "menu-items">
+                    {/* <button onClick={() => this.resetArray()}> Generate New Array </button>
+                    <button onClick={() => this.mergeSort()}> Merge Sort </button> */}
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{margin: 20}}
+                        size="large"
+                        onClick={() => this.resetArray()}
+                        >
+                        Generate New Array
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{margin: 20}}
+                        size="large"
+                        startIcon={<MergeTypeIcon />}
+                        onClick={() => this.mergeSort()}
+                        >
+                        Merge Sort
+                    </Button>
+                </div>
             </div>
         );
     }
@@ -113,21 +111,10 @@ function randomIntFromInterval(min,max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-
-function arraysAreEqual(testArray, myArray) {
-    if(testArray.length !== myArray.length) return false;
-    for (let i = 0; i < myArray.length; i ++ ) {
-        if (testArray[0] !== myArray[0]) return false;
-    }
-    return true;
-}
-
-
-
-
-
-
-// Add some timers eventually
-// A way to test different sorting algorithms on the same array
-
 // https://www.youtube.com/watch?v=pFXYym4Wbkc
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));

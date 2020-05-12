@@ -1,11 +1,15 @@
 .array-container{
-    position: absolute;
-    left: 100px;
+    position: relative;
+    left: 115px;
 }
 
 .array-bar {
-    width: 2px;
+    width: 4px;
     background-color: purple;
     display: inline-block;
     margin: 0 1px;
 }
+
+/* .menu-items{
+
+} */

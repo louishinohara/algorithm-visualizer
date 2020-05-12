@@ -10,7 +10,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
 import BubbleChartIcon from '@material-ui/icons/BubbleChart';
 import TimerIcon from '@material-ui/icons/Timer';
@@ -19,10 +18,7 @@ import InsertLinkIcon from '@material-ui/icons/InsertLink';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 
 
 const drawerWidth = 230;

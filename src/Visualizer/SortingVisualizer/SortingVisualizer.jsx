@@ -1,72 +1,84 @@
-import React from 'react';
+import React, {useState, useEffect,PureComponent} from 'react';
 import './SortingVisualizer.css';
 import { getMergeSortAnimations } from './sortingAlgorithms/mergeSort.js';
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
+// import {useWindowDimensions} from '../../components/windowDimensions.js';
+// import Container from '@material-ui/core/Container';
+// import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
 import Slider from '@material-ui/core/Slider';
+import ReactResizeDetector from 'react-resize-detector';
+import ResizeDetector from 'react-resize-detector';
+    // This is the main color of the array bars.
+    const PRIMARY_COLOR = 'turquoise';
 
-// This is the main color of the array bars.
-const PRIMARY_COLOR = 'turquoise';
+    // This is the color of array bars that are being compared throughout the animations.
+    const SECONDARY_COLOR = 'red';
+    // # of Bars
+    const bars = [
+    {
+        value: 0,
+        label: '0',
+    },
+    {
+        value: 100,
+        label: '100',
+    },
+    {
+        value: 200,
+        label: '200',
+    },
+    {
+        value: 500,
+        label: '500',
+    },
+    ];
+    // Speed of algorithm
+    const speed = [
+    {
+        value: 0,
+        label: '0',
+    },
+    {
+        value: 20,
+        label: '20',
+    },
+    {
+        value: 40,
+        label: '40',
+    },
+    {
+        value: 60,
+        label: '60',
+    },
+    {
+        value: 80,
+        label: '80',
+    },
+    {
+        value: 100,
+        label: '100',
+    },
+    ];
 
-// This is the color of array bars that are being compared throughout the animations.
-const SECONDARY_COLOR = 'red';
-// # of Bars
-const bars = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-  {
-    value: 200,
-    label: '200',
-  },
-  {
-    value: 500,
-    label: '500',
-  },
-];
-// Speed of algorithm
-const speed = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 20,
-    label: '20',
-  },
-  {
-    value: 40,
-    label: '40',
-  },
-  {
-    value: 60,
-    label: '60',
-  },
-  {
-    value: 80,
-    label: '80',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
+    var arrayBar = {
+        width: '4px',
+    };
+
 
 
 export default class SortingVisualizer extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             array: [],
+            width: 0,
+            height: 0,
+            barHeight: 0.85,   // Changes the size of the height of the bars to scale page
             ANIMATION_SPEED_MS: 10,
-            NUMBER_OF_ARRAY_BARS: 200   // Change this value for the number of bars (value) in the array.
+            NUMBER_OF_ARRAY_BARS: 201,   // Change this value for the number of bars (value) in the array.
+            MAX_NUMBER_OF_BARS: 500
         };
    }
 
@@ -75,28 +87,39 @@ export default class SortingVisualizer extends React.Component {
         this.resetArray();
     }
 
-
-
 // Function to clear array values and fill it will 100 random numbers
 // Includes duplicate values
     resetArray() {
         const array = [];
         for (let i = 0; i < this.state.NUMBER_OF_ARRAY_BARS; i++) {
-        array.push(randomIntFromInterval(5, 730));
+        array.push(randomIntFromInterval(5, 730) * this.state.barHeight);
         }
         this.setState({array});
     }
+
 // Changes the Number of Bars in the algorithm
     changeBarCount(bars) {
-        this.state.NUMBER_OF_ARRAY_BARS = bars;
+        var NUMBER_OF_ARRAY_BARS = bars;
+        this.setState({NUMBER_OF_ARRAY_BARS});
         this.resetArray();
     }
+
 // Changes the speed of the Algorithm
     changeSpeed(time) {
-        const ANIMATION_SPEED_MS = 100;
-        this.state.ANIMATION_SPEED_MS = time * 10;
-        // this.setState({ANIMATION_SPEED_MS});
+        var ANIMATION_SPEED_MS = time * 10;
+        this.setState({ANIMATION_SPEED_MS});
     }
+
+    getDimensions(width,height) {
+        var barHeight = Math.floor(width / height) * .4;
+        var MAX_NUMBER_OF_BARS = Math.floor(width / 6);
+        // if (this.state.NUMBER_OF_ARRAY_BARS -  > MAX_NUMBER_OF_BARS) {
+
+        // }
+        this.setState({MAX_NUMBER_OF_BARS});
+        // this.setState({barHeight});
+        // console.log(barHeight);
+    };
 
 
     mergeSort() {
@@ -117,7 +140,7 @@ export default class SortingVisualizer extends React.Component {
             setTimeout(() => {
             const [barOneIdx, newHeight] = animations[i];
             const barOneStyle = arrayBars[barOneIdx].style;
-            barOneStyle.height = `${newHeight}px`;
+            barOneStyle.height = `${newHeight * this.state.barHeight}px`;
             }, i * this.state.ANIMATION_SPEED_MS);
         }
         }
@@ -126,19 +149,34 @@ export default class SortingVisualizer extends React.Component {
  
     render() {
         const {array} = this.state;
+        
         // const classes = useStyles();
         return (
             <div>
                 <div className="array-container"> 
+
                         {array.map((value,idx) => (
                     <div 
                         className = "array-bar" 
                         key={idx}                 
                         style={{
                             backgroundColor: PRIMARY_COLOR,
-                            height: `${value}px` 
-                                }}></div>   
+                            height: `${value * this.state.barHeight}px`,
+                            width : '4px',
+                                }}>
+                                
+                    </div>   
                     ))}
+                                                        <ResizeDetector
+                        handleWidth
+                        handleHeight
+                        onResize={(width,height)=> this.getDimensions(width,height)}
+                        render={({ width, height }) => (
+                            <div>
+                            Width:{width}, Height:{height}
+                            </div>
+                        )}
+                    />
                 </div>
                 <div className = "menu-items">
                     {/* <button onClick={() => this.resetArray()}> Generate New Array </button>
@@ -163,8 +201,8 @@ export default class SortingVisualizer extends React.Component {
                         Merge Sort
                     </Button>
                     <Slider
-                        defaultValue={300}
-                        max={500}
+                        defaultValue={this.state.NUMBER_OF_ARRAY_BARS}
+                        max={this.state.MAX_NUMBER_OF_BARS}
                         // getAriaValueText={valuetext}
                         aria-labelledby="discrete-slider-always"
                         step={5}
@@ -192,6 +230,7 @@ export default class SortingVisualizer extends React.Component {
                     >
                         Test Number of Array
                     </Button>
+
                 </div>
             </div>
         );
@@ -209,9 +248,9 @@ function randomIntFromInterval(min,max) {
 
 // https://www.youtube.com/watch?v=pFXYym4Wbkc
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
+// const useStyles = makeStyles((theme) => ({
+//   button: {
+//     margin: theme.spacing(1),
+//   },
   
-}));
+// }));

@@ -4,8 +4,12 @@
 
 - The graph is in a container
     - Depending on the number of bars, the bar sizes change to fit the graph's container
-- Slider to pick # of graphs
-- Slider to pick length of time
+- Graph Stays but the button to pick the sorting algorithm changes
+- Animation on top has algorithm type that changes
+- Slider to pick # of graphs (DONE)
+    - Find max width of the screen size and make that the new max of the # of bars so it never overflows
+    - Change the width of each bar depending on the number of bars rendered
+- Slider to pick length of time (DONE)
 
 
 

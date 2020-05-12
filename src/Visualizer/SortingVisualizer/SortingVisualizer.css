@@ -6,8 +6,6 @@
 }
 
 .array-bar {
-    width: 4px;
-    background-color: purple;
     display: inline-block;
     margin: 0 1px;
 }

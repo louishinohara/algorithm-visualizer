@@ -15,24 +15,7 @@ import ResizeDetector from 'react-resize-detector';
     // This is the color of array bars that are being compared throughout the animations.
     const SECONDARY_COLOR = 'red';
     // # of Bars
-    const bars = [
-    {
-        value: 0,
-        label: '0',
-    },
-    {
-        value: 100,
-        label: '100',
-    },
-    {
-        value: 200,
-        label: '200',
-    },
-    {
-        value: 500,
-        label: '500',
-    },
-    ];
+
     // Speed of algorithm
     const speed = [
     {
@@ -61,9 +44,9 @@ import ResizeDetector from 'react-resize-detector';
     },
     ];
 
-    var arrayBar = {
-        width: '4px',
-    };
+    // var arrayBar = {
+    //     width: '4px',
+    // };
 
 
 
@@ -76,9 +59,11 @@ export default class SortingVisualizer extends React.Component {
             width: 0,
             height: 0,
             barHeight: 0.85,   // Changes the size of the height of the bars to scale page
-            ANIMATION_SPEED_MS: 10,
-            NUMBER_OF_ARRAY_BARS: 201,   // Change this value for the number of bars (value) in the array.
-            MAX_NUMBER_OF_BARS: 500
+            BAR_WIDTH: 4,
+            ANIMATION_SPEED_MS: 1,
+            NUMBER_OF_ARRAY_BARS: 100,   // Change this value for the number of bars (value) in the array.
+            MAX_NUMBER_OF_BARS: 175,
+
         };
    }
 
@@ -100,23 +85,41 @@ export default class SortingVisualizer extends React.Component {
 // Changes the Number of Bars in the algorithm
     changeBarCount(bars) {
         var NUMBER_OF_ARRAY_BARS = bars;
+    // Need to get number of bars
         this.setState({NUMBER_OF_ARRAY_BARS});
         this.resetArray();
     }
 
 // Changes the speed of the Algorithm
     changeSpeed(time) {
-        var ANIMATION_SPEED_MS = time * 10;
+        var ANIMATION_SPEED_MS = time;
         this.setState({ANIMATION_SPEED_MS});
     }
 
     getDimensions(width,height) {
         var barHeight = Math.floor(width / height) * .4;
-        var MAX_NUMBER_OF_BARS = Math.floor(width / 6);
-        // if (this.state.NUMBER_OF_ARRAY_BARS -  > MAX_NUMBER_OF_BARS) {
+        var MAX_NUMBER_OF_BARS = Math.floor(width / 6.5);
 
-        // }
+        var BAR_WIDTH = width / (this.state.NUMBER_OF_ARRAY_BARS * 1.65);
+        this.setState({BAR_WIDTH});
+
+    // SETS THE MAX NUMBER OF BARS FOR THE PAGE
         this.setState({MAX_NUMBER_OF_BARS});
+    // If the Current Number Of Bars exceeds the max amount of bars available on screen, make it max
+        // if (this.state.NUMBER_OF_ARRAY_BARS > MAX_NUMBER_OF_BARS * .55) {
+        //     var NUMBER_OF_ARRAY_BARS = MAX_NUMBER_OF_BARS;
+        //     var adjustedVal = this.MAX_NUMBER_OF_ARRAY_BARS - this.state.NUMBERS_OF_ARRAY_BARS;
+        //     this.state.array.splice(adjustedVal);
+
+
+
+            
+        //     // this.changeBarCount(MAX_NUMBER_OF_BARS);
+        // }
+        // else {
+        //     this.setState({MAX_NUMBER_OF_BARS});
+        // }
+        
         // this.setState({barHeight});
         // console.log(barHeight);
     };
@@ -149,7 +152,33 @@ export default class SortingVisualizer extends React.Component {
  
     render() {
         const {array} = this.state;
-        
+    // Ticks for the # of bars on the slider
+        var bars = [
+            {
+                value: 0,
+                label: '0',
+            },
+            {
+                value: Math.floor(this.state.MAX_NUMBER_OF_BARS * .2),
+                label: `${Math.floor(this.state.MAX_NUMBER_OF_BARS * .2)}`,
+            },
+            {
+                value: Math.floor(this.state.MAX_NUMBER_OF_BARS * .4),
+                label: `${Math.floor(this.state.MAX_NUMBER_OF_BARS * .4)}`,
+            },
+            {
+                value: Math.floor(this.state.MAX_NUMBER_OF_BARS * .6),
+                label: `${Math.floor(this.state.MAX_NUMBER_OF_BARS * .6)}`,
+            },
+            {
+                value: Math.floor(this.state.MAX_NUMBER_OF_BARS * .8),
+                label: `${Math.floor(this.state.MAX_NUMBER_OF_BARS * .8)}`,
+            },
+            {
+                value: this.state.MAX_NUMBER_OF_BARS,
+                label: `${Math.floor(this.state.MAX_NUMBER_OF_BARS)}`,
+            },
+        ];
         // const classes = useStyles();
         return (
             <div>
@@ -162,12 +191,12 @@ export default class SortingVisualizer extends React.Component {
                         style={{
                             backgroundColor: PRIMARY_COLOR,
                             height: `${value * this.state.barHeight}px`,
-                            width : '4px',
+                            width : `${this.state.BAR_WIDTH}px`,
                                 }}>
                                 
                     </div>   
                     ))}
-                                                        <ResizeDetector
+                    <ResizeDetector
                         handleWidth
                         handleHeight
                         onResize={(width,height)=> this.getDimensions(width,height)}
@@ -202,18 +231,17 @@ export default class SortingVisualizer extends React.Component {
                     </Button>
                     <Slider
                         defaultValue={this.state.NUMBER_OF_ARRAY_BARS}
+                        min={8}
                         max={this.state.MAX_NUMBER_OF_BARS}
-                        // getAriaValueText={valuetext}
                         aria-labelledby="discrete-slider-always"
-                        step={5}
+                        step={1}
                         onChange={ (e, val) => this.changeBarCount(val) } 
                         marks={bars}
                         valueLabelDisplay="on"
                     />
                     <Slider
-                        defaultValue={2}
+                        defaultValue={this.state.ANIMATION_SPEED_MS}
                         max={100}
-                        // getAriaValueText={valuetext}
                         aria-labelledby="discrete-slider-always"
                         step={1}
                         onChange={ (e, val) => this.changeSpeed(val) } 

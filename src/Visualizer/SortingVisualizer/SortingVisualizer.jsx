@@ -1,22 +1,19 @@
-import React, {useState, useEffect,PureComponent} from 'react';
-import './SortingVisualizer.css';
+import React from 'react';
 import { getMergeSortAnimations } from './sortingAlgorithms/mergeSort.js';
-// import {useWindowDimensions} from '../../components/windowDimensions.js';
-// import Container from '@material-ui/core/Container';
-// import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
 import Slider from '@material-ui/core/Slider';
-import ReactResizeDetector from 'react-resize-detector';
 import ResizeDetector from 'react-resize-detector';
-    // This is the main color of the array bars.
-    const PRIMARY_COLOR = 'turquoise';
+import './SortingVisualizer.css';
 
-    // This is the color of array bars that are being compared throughout the animations.
-    const SECONDARY_COLOR = 'red';
-    // # of Bars
+// This is the main color of the array bars.
+const PRIMARY_COLOR = 'turquoise';
 
-    // Speed of algorithm
+// This is the color of array bars that are being compared throughout the animations.
+const SECONDARY_COLOR = 'red';
+// # of Bars
+
+// Marks for the speed of algorithm on slider
     const speed = [
     {
         value: 0,
@@ -44,21 +41,14 @@ import ResizeDetector from 'react-resize-detector';
     },
     ];
 
-    // var arrayBar = {
-    //     width: '4px',
-    // };
-
-
-
-export default class SortingVisualizer extends React.Component {
-    
+export default class SortingVisualizer extends React.Component {    
     constructor(props) {
         super(props);
         this.state = {
             array: [],
             width: 0,
             height: 0,
-            barHeight: 0.85,   // Changes the size of the height of the bars to scale page
+            barHeight: 0.85,            // Changes the size of the height of the bars to scale page
             BAR_WIDTH: 4,
             ANIMATION_SPEED_MS: 1,
             NUMBER_OF_ARRAY_BARS: 100,   // Change this value for the number of bars (value) in the array.
@@ -85,7 +75,6 @@ export default class SortingVisualizer extends React.Component {
 // Changes the Number of Bars in the algorithm
     changeBarCount(bars) {
         var NUMBER_OF_ARRAY_BARS = bars;
-    // Need to get number of bars
         this.setState({NUMBER_OF_ARRAY_BARS});
         this.resetArray();
     }
@@ -96,15 +85,25 @@ export default class SortingVisualizer extends React.Component {
         this.setState({ANIMATION_SPEED_MS});
     }
 
+// Changes the max value of the slider depending on the width of the screen
     getDimensions(width,height) {
-        var barHeight = Math.floor(width / height) * .4;
+        // Changes the number of bars depending on the width of the screen
         var MAX_NUMBER_OF_BARS = Math.floor(width / 6.5);
 
+        // SETS THE MAX NUMBER OF BARS FOR THE PAGE
+        this.setState({MAX_NUMBER_OF_BARS});
+
+        // Sets the size of the bar width depending on the number of bars
         var BAR_WIDTH = width / (this.state.NUMBER_OF_ARRAY_BARS * 1.65);
         this.setState({BAR_WIDTH});
 
-    // SETS THE MAX NUMBER OF BARS FOR THE PAGE
-        this.setState({MAX_NUMBER_OF_BARS});
+        // Changes the height of the bar depending on the size of the screen
+        var barHeight = Math.floor(width / height) * .4;
+        // this.setState({barHeight});
+
+
+// NEED TO CREATE A FUNCTION THAT DECREASES THE CURRENT NUMBER OF ARRAY BARS IF THE SCREEN SIZE IS BEING SHRUNK
+
     // If the Current Number Of Bars exceeds the max amount of bars available on screen, make it max
         // if (this.state.NUMBER_OF_ARRAY_BARS > MAX_NUMBER_OF_BARS * .55) {
         //     var NUMBER_OF_ARRAY_BARS = MAX_NUMBER_OF_BARS;
@@ -179,11 +178,13 @@ export default class SortingVisualizer extends React.Component {
                 label: `${Math.floor(this.state.MAX_NUMBER_OF_BARS)}`,
             },
         ];
-        // const classes = useStyles();
+// const classes = useStyles();
         return (
-            <div>
+            <div style={{
+                        paddingLeft: '250px',
+                        paddingRight: '50px'
+                        }}> 
                 <div className="array-container"> 
-
                         {array.map((value,idx) => (
                     <div 
                         className = "array-bar" 
@@ -192,8 +193,7 @@ export default class SortingVisualizer extends React.Component {
                             backgroundColor: PRIMARY_COLOR,
                             height: `${value * this.state.barHeight}px`,
                             width : `${this.state.BAR_WIDTH}px`,
-                                }}>
-                                
+                                }}>   
                     </div>   
                     ))}
                     <ResizeDetector
@@ -231,7 +231,7 @@ export default class SortingVisualizer extends React.Component {
                     </Button>
                     <Slider
                         defaultValue={this.state.NUMBER_OF_ARRAY_BARS}
-                        min={8}
+                        min={0}
                         max={this.state.MAX_NUMBER_OF_BARS}
                         aria-labelledby="discrete-slider-always"
                         step={1}
@@ -248,16 +248,6 @@ export default class SortingVisualizer extends React.Component {
                         marks={speed}
                         valueLabelDisplay="on"
                     />
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{margin: 20}}
-                        size="large"
-                        startIcon={<MergeTypeIcon />}
-                        onClick={() => console.log(this.state.NUMBER_OF_ARRAY_BARS)}
-                    >
-                        Test Number of Array
-                    </Button>
 
                 </div>
             </div>
@@ -269,10 +259,6 @@ export default class SortingVisualizer extends React.Component {
 function randomIntFromInterval(min,max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
-// function valuetext(value) {
-//     return `${value}°F`;
-// }
 
 // https://www.youtube.com/watch?v=pFXYym4Wbkc
 

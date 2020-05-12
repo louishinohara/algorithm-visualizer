@@ -31,6 +31,7 @@ export default function ClippedDrawer() {
   const [openSorting, setOpenSorting] = React.useState(true);
   const [openPathfinding, setOpenPathfinding] = React.useState(false);
   const [openGraphTraversal, setOpenGraphTraversal] = React.useState(false);
+  const [chooseMergeSort, setMergeSortButton] = React.useState(true);
 
   const handleClickSorting = () => {
     setOpenSorting(!openSorting);
@@ -41,8 +42,12 @@ export default function ClippedDrawer() {
     setOpenPathfinding(!openPathfinding);
   };
 
-    const handleClickGraphTraversal = () => {
+  const handleClickGraphTraversal = () => {
     setOpenGraphTraversal(!openGraphTraversal);
+  };
+
+  const selectMergeSort = () => {
+    setMergeSortButton(!chooseMergeSort);
   };
 
   return (
@@ -108,7 +113,7 @@ export default function ClippedDrawer() {
                       <ListItemText primary="Selection Sort" />
               </ListItem>
 
-              <ListItem button className={classes.nested}>
+              <ListItem button className={classes.nested} onClick={selectMergeSort}>
                   <ListItemIcon>
                       <MergeTypeIcon />
                   </ListItemIcon>
@@ -230,7 +235,7 @@ export default function ClippedDrawer() {
       {/* <SortingVisualizer></SortingVisualizer> */}
 
       <Toolbar />
-            <Typography paragraph>
+            {/* <Typography paragraph>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
               ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
               facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
@@ -241,11 +246,37 @@ export default function ClippedDrawer() {
               imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
               arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
               donec massa sapien faucibus et molestie ac.
-            </Typography>
-
+            </Typography> */}
+{/* 
               <div classes={classes.sortingbars}> 
 
                 {openSorting ? <SortingVisualizer></SortingVisualizer> : <div> Hidden </div> }
+
+              </div> */}
+
+              <div > 
+
+                {chooseMergeSort ? 
+                <div>
+                <Typography> Merge Sort </Typography>
+                <SortingVisualizer></SortingVisualizer>
+                </div>
+                  : 
+                  <div>  </div> 
+                  }
+
+              </div>
+
+              <div > 
+
+                {openPathfinding ? 
+                <div>
+                <Typography> Merge Sort </Typography>
+                <SortingVisualizer></SortingVisualizer>
+                </div>
+                  : 
+                  <div>  </div> 
+                  }
 
               </div>
 
@@ -257,7 +288,7 @@ export default function ClippedDrawer() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    // display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,

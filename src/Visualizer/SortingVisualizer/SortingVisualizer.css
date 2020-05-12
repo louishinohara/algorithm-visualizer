@@ -1,8 +1,6 @@
 .array-container{
     position: relative;
     top: 115px;
-    
-    /* padding-top: 100, */
 }
 
 .array-bar {
@@ -13,4 +11,12 @@
 .menu-items{
     position: relative;
     top: 115px;
+}
+
+.bar-count-slider {
+
+}
+
+.timer-slider {
+    
 }

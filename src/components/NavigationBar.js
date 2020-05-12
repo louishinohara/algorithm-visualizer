@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -18,6 +19,11 @@ import InsertLinkIcon from '@material-ui/icons/InsertLink';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+
 
 const drawerWidth = 230;
 
@@ -26,17 +32,38 @@ const drawerWidth = 230;
 
 export default function ClippedDrawer() {
   const classes = useStyles();
+  const [openSorting, setOpenSorting] = React.useState(true);
+  const [openPathfinding, setOpenPathfinding] = React.useState(true);
+  const [openGraphTraversal, setOpenGraphTraversal] = React.useState(true);
+
+  const handleClickSorting = () => {
+    setOpenSorting(!openSorting);
+  };
+
+  const handleClickPathfinding = () => {
+    setOpenPathfinding(!openPathfinding);
+  };
+
+    const handleClickGraphTraversal = () => {
+    setOpenGraphTraversal(!openGraphTraversal);
+  };
+
   return (
+
   <div className={classes.root}>
       <CssBaseline />
     <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap
-          style={{ fontSize: 28 }}>
+              style={{ 
+                  fontSize: 28 
+                }}>
             Algorithm Visualizer
           </Typography>
         </Toolbar>
     </AppBar>
+
+{/* ============================= START DRAWER ========================= */}
     <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -46,7 +73,8 @@ export default function ClippedDrawer() {
     <Toolbar />
     <div className={classes.drawerContainer}>
 
-          <ListItem >
+{/* ============================= FIRST TAB ========================= */}
+          <ListItem button onClick={handleClickSorting}>
                 <ListItemText
                   disableTypography
                   primary={
@@ -60,53 +88,64 @@ export default function ClippedDrawer() {
                     Sorting Algorithms
                   </Typography>}
                 />
+                {/* {openSorting ? <ExpandLess /> : <ExpandMore />} */}
           </ListItem>
 
-        <Divider />
+          <Divider />
 
-          <ListItem button>
-            <ListItemIcon>
-                <InsertLinkIcon />
-            </ListItemIcon>
-                <ListItemText primary="Insertion Sort" />
-          </ListItem>
+          <Collapse in={openSorting} timeout="auto" unmountOnExit>
 
-          <ListItem button>
-            <ListItemIcon>
-                <ColorizeIcon />
-            </ListItemIcon>
-                <ListItemText primary="Selection Sort" />
-          </ListItem>
+            <List component="div" disablePadding>
 
-          <ListItem button>
-            <ListItemIcon>
-                <MergeTypeIcon />
-            </ListItemIcon>
-                <ListItemText primary="Merge Sort" />
-          </ListItem>
-            
-          <ListItem button>
-            <ListItemIcon>
-                <TimerIcon />
-            </ListItemIcon>
-                <ListItemText primary="Quick Sort" />
-          </ListItem>
+              <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <InsertLinkIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Insertion Sort" />
+              </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-                <AccountTreeIcon />
-            </ListItemIcon>
-                <ListItemText primary="Heap Sort" />
-          </ListItem>
+              <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <ColorizeIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Selection Sort" />
+              </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-                <BubbleChartIcon />
-            </ListItemIcon>
-                <ListItemText primary="Bubble Sort" />
-          </ListItem>
+              <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <MergeTypeIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Merge Sort" />
+              </ListItem>
 
-          <ListItem>
+              <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <TimerIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Quick Sort" />
+              </ListItem>
+
+              <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <AccountTreeIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Heap Sort" />
+              </ListItem>    
+
+              <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <BubbleChartIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Bubble Sort" />
+              </ListItem>   
+
+            </List>
+
+          </Collapse>
+
+{/* ============================= SECOND TAB ========================= */}
+
+          <ListItem onClick={handleClickPathfinding}>
                 <ListItemText
                   disableTypography
                   primary={
@@ -119,54 +158,73 @@ export default function ClippedDrawer() {
                         Pathfinding Algorithms 
                   </Typography>}
                 />
+                {/* {openPathfinding ? <ExpandLess /> : <ExpandMore />} */}
           </ListItem>
 
           <Divider />
 
-          <ListItem button>
-            <ListItemIcon>
-                <ExtensionIcon />
-            </ListItemIcon>
-                <ListItemText primary="Dijkstra's Algorithm" />
-          </ListItem>
+          <Collapse in={openPathfinding} timeout="auto" unmountOnExit>
 
-          <ListItem button>
-            <ListItemIcon>
-                <AllInclusiveIcon />
-            </ListItemIcon>
-                <ListItemText primary="A * Algorithm" />
-          </ListItem>
+            <List component="div" disablePadding>
 
-          <ListItem>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                    <ExtensionIcon />
+                </ListItemIcon>
+                    <ListItemText primary="Dijkstra's Algorithm" />
+              </ListItem>
+
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                    <AllInclusiveIcon />
+                </ListItemIcon>
+                    <ListItemText primary="A * Algorithm" />
+              </ListItem>
+
+            </List>
+
+          </Collapse>
+
+{/* ============================= THIRD TAB ========================= */}
+          <ListItem onClick={handleClickGraphTraversal}>
                 <ListItemText
                   disableTypography
                   primary={
                     <Typography 
                       style={{ 
-                        fontSize: 24, 
+                        fontSize: 22, 
                         fontWeight: 'bold', 
                         paddingTop: '50px', 
                         textAlign: 'center'}}>
                           Graph Traversal Algorithms 
                     </Typography>}
                   />
+                  {/* {openGraphTraversal ? <ExpandLess /> : <ExpandMore />} */}
           </ListItem>
 
           <Divider />
 
-          <ListItem button>
-            <ListItemIcon>
-                <ExtensionIcon />
-            </ListItemIcon>
-                <ListItemText primary="Depth First Search" />
-          </ListItem>
+          <Collapse in={openGraphTraversal} timeout="auto" unmountOnExit>
 
-          <ListItem button>
-            <ListItemIcon>
-                <ExtensionIcon />
-            </ListItemIcon>
-                <ListItemText primary="Bredth First Search" />
-          </ListItem>
+              <List component="div" disablePadding>
+
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <ExtensionIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Depth First Search" />
+                </ListItem>
+
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                      <ExtensionIcon />
+                  </ListItemIcon>
+                      <ListItemText primary="Bredth First Search" />
+                </ListItem>
+
+              </List>
+
+          </Collapse>
 
     </div>
       </Drawer>
@@ -217,5 +275,8 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
   },
 }));

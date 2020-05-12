@@ -12,7 +12,7 @@ class App extends Component{
     <div className="App">
       <ClippedDrawer/>
       {/* <NavigationBar/> */}
-      <SortingVisualizer></SortingVisualizer>
+      {/* <SortingVisualizer></SortingVisualizer> */}
     </div>
   );
   }

@@ -19,7 +19,7 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 import Collapse from '@material-ui/core/Collapse';
-
+import SortingVisualizer from "../Visualizer/SortingVisualizer/SortingVisualizer";
 
 const drawerWidth = 230;
 
@@ -29,11 +29,12 @@ const drawerWidth = 230;
 export default function ClippedDrawer() {
   const classes = useStyles();
   const [openSorting, setOpenSorting] = React.useState(true);
-  const [openPathfinding, setOpenPathfinding] = React.useState(true);
-  const [openGraphTraversal, setOpenGraphTraversal] = React.useState(true);
+  const [openPathfinding, setOpenPathfinding] = React.useState(false);
+  const [openGraphTraversal, setOpenGraphTraversal] = React.useState(false);
 
   const handleClickSorting = () => {
     setOpenSorting(!openSorting);
+
   };
 
   const handleClickPathfinding = () => {
@@ -226,6 +227,7 @@ export default function ClippedDrawer() {
       </Drawer>
 
           <main className={classes.content}>
+      {/* <SortingVisualizer></SortingVisualizer> */}
 
       <Toolbar />
             <Typography paragraph>
@@ -240,6 +242,13 @@ export default function ClippedDrawer() {
               arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
               donec massa sapien faucibus et molestie ac.
             </Typography>
+
+              <div classes={classes.sortingbars}> 
+
+                {openSorting ? <SortingVisualizer></SortingVisualizer> : <div> Hidden </div> }
+
+              </div>
+
           </main>
 
     </div>
@@ -269,10 +278,15 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',    
   },
   content: {
-    flexGrow: 1,
+    // flexGrow: 1,
     padding: theme.spacing(3),
   },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+  sortingbars: {
+    position: 'relative',
+    paddingTop: 100,
+
   },
 }));

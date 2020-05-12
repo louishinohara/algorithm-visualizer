@@ -1,0 +1,16 @@
+- Make the chart appear only when sorting algorithm is chosen
+- The graph always stays but the choices change depending on the tab
+    - Tab is highlighted
+
+- The graph is in a container
+    - Depending on the number of bars, the bar sizes change to fit the graph's container
+- Slider to pick # of graphs
+- Slider to pick length of time
+
+
+
+
+
+SORTING
+- Can't change the speed during the middle of the algorithm
+- Clicking generate new array during the middle of the algorithm should reset everything

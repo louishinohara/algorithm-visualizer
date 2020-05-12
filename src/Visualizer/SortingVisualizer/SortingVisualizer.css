@@ -1,6 +1,8 @@
 .array-container{
     position: relative;
-    left: 115px;
+    top: 115px;
+    
+    /* padding-top: 100, */
 }
 
 .array-bar {
@@ -10,6 +12,7 @@
     margin: 0 1px;
 }
 
-/* .menu-items{
-
-} */
+.menu-items{
+    position: relative;
+    top: 115px;
+}

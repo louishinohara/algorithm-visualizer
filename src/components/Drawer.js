@@ -95,6 +95,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </Toolbar>
       </AppBar>
+      <Toolbar /> 
 
       {/* ============================= START DRAWER ========================= */}
       <Drawer

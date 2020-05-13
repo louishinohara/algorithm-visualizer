@@ -194,11 +194,11 @@ export default class SortingVisualizer extends React.Component {
                 handleWidth
                 handleHeight
                 onResize={(width, height) => this.getDimensions(width, height)}
-                render={({ width, height }) => (
-                  <div>
-                    Width:{width}, Height:{height}
-                  </div>
-                )}
+                // render={({ width, height }) => (
+                //   <div>
+                //     Width:{width}, Height:{height}
+                //   </div>
+                // )}
               />
             </div>
           </Grid>
@@ -266,12 +266,3 @@ export default class SortingVisualizer extends React.Component {
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
-// https://www.youtube.com/watch?v=pFXYym4Wbkc
-
-// const useStyles = makeStyles((theme) => ({
-//   button: {
-//     margin: theme.spacing(1),
-//   },
-
-// }));

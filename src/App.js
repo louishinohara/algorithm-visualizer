@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import SortingVisualizer from "./Visualizer/SortingVisualizer/SortingVisualizer";
 import PathFindingVisualizer from "./Visualizer/PathFindingVisualizer/PathFindingVisualizer";
 import NavigationController from "./components/NavigationController";
-import Header from './components/Header';
+import Header from "./components/Header/Header";
 import "./App.css";
 
 export default class App extends Component {
@@ -12,15 +12,17 @@ export default class App extends Component {
     return (
       <div className="App">
         <Grid container spacing={0} alignItems="center" justify="center">
-
-            <PersistentDrawerLeft />
+          <PersistentDrawerLeft />
+          <Grid lg={12} justify="center">
             <Header />
+          </Grid>
           <Grid>
             <NavigationController />
           </Grid>
         </Grid>
+        {/* <PathFindingVisualizer/>
+        {/* <SortingVisualizer/> */} 
       </div>
     );
   }
 }
-

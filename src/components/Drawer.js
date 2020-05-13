@@ -33,7 +33,7 @@ const drawerWidth = 240;
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [openSorting, setOpenSorting] = React.useState(true);
   const [openPathfinding, setOpenPathfinding] = React.useState(false);
   const [openGraphTraversal, setOpenGraphTraversal] = React.useState(false);
@@ -249,13 +249,13 @@ export default function PersistentDrawerLeft() {
         </div>
       </Drawer>
 
-      <main
+      {/* <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
         <div className={classes.drawerHeader} />
-{/* For Sorting */}
+For Sorting
         <div>
           {openSorting ? (
             <div>
@@ -265,7 +265,7 @@ export default function PersistentDrawerLeft() {
             <div> </div>
           )}
         </div>
-{/* For Pathfinding */}
+For Pathfinding
         <div>
           {openPathfinding ? (
             <div>
@@ -277,14 +277,14 @@ export default function PersistentDrawerLeft() {
             <div> </div>
           )}
         </div>
-      </main>
+      </main> */}
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#2a3439",
+    background: "#333333",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

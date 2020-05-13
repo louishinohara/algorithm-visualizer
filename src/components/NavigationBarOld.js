@@ -288,7 +288,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    background: "#2a3439",
+    background: "#333333",
   },
   drawer: {
     width: drawerWidth,

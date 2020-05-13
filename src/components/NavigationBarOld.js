@@ -1,17 +1,12 @@
 import React from "react";
-import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -26,16 +21,14 @@ import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import Collapse from "@material-ui/core/Collapse";
 import SortingVisualizer from "../Visualizer/SortingVisualizer/SortingVisualizer";
 import PathFindingVisualizer from "../Visualizer/PathFindingVisualizer/PathFindingVisualizer";
-import GitHubIcon from "@material-ui/icons/GitHub";
+const drawerWidth = 230;
 
-const drawerWidth = 240;
+// https://material-ui.com/components/icons/#material-icons
 
-export default function PersistentDrawerLeft() {
+export default function ClippedDrawer() {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
-  const [openSorting, setOpenSorting] = React.useState(true);
-  const [openPathfinding, setOpenPathfinding] = React.useState(false);
+  const [openSorting, setOpenSorting] = React.useState(false);
+  const [openPathfinding, setOpenPathfinding] = React.useState(true);
   const [openGraphTraversal, setOpenGraphTraversal] = React.useState(false);
   const [chooseMergeSort, setMergeSortButton] = React.useState(true);
 
@@ -55,77 +48,51 @@ export default function PersistentDrawerLeft() {
     setMergeSortButton(!chooseMergeSort);
   };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const btnClick = () => {
-    window.open("https://github.com/louishinohara/algorithm-visualizer");
-  };
-
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+          <Typography
+            variant="h6"
+            noWrap
+            style={{
+              fontSize: 28,
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Algorithm Visualization
+            Algorithm Visualizer
           </Typography>
-          <div className={classes.grow} />
-
-          <IconButton color="inherit" onClick={btnClick}>
-            <GitHubIcon style={{ fontSize: 30 }} />
-          </IconButton>
         </Toolbar>
       </AppBar>
 
       {/* ============================= START DRAWER ========================= */}
       <Drawer
         className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
+        variant="permanent"
         classes={{
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
-
+        <Toolbar />
         <div className={classes.drawerContainer}>
           {/* ============================= FIRST TAB ========================= */}
           <ListItem button onClick={handleClickSorting}>
             <ListItemText
               disableTypography
               primary={
-                <Typography className={classes.drawerText}>Sorting</Typography>
+                <Typography
+                  style={{
+                    fontSize: 26,
+                    fontWeight: "bold",
+                    paddingTop: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  Sorting Algorithms
+                </Typography>
               }
             />
+            {/* {openSorting ? <ExpandLess /> : <ExpandMore />} */}
           </ListItem>
 
           <Divider />
@@ -186,8 +153,15 @@ export default function PersistentDrawerLeft() {
             <ListItemText
               disableTypography
               primary={
-                <Typography className={classes.drawerText}>
-                  Pathfinding
+                <Typography
+                  style={{
+                    fontSize: 26,
+                    fontWeight: "bold",
+                    paddingTop: "50px",
+                    textAlign: "center",
+                  }}
+                >
+                  Pathfinding Algorithms
                 </Typography>
               }
             />
@@ -219,8 +193,15 @@ export default function PersistentDrawerLeft() {
             <ListItemText
               disableTypography
               primary={
-                <Typography className={classes.drawerText}>
-                  Graph Traversal
+                <Typography
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "bold",
+                    paddingTop: "50px",
+                    textAlign: "center",
+                  }}
+                >
+                  Graph Traversal Algorithms
                 </Typography>
               }
             />
@@ -249,28 +230,47 @@ export default function PersistentDrawerLeft() {
         </div>
       </Drawer>
 
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-{/* For Sorting */}
-        <div>
-          {openSorting ? (
-            <div>
-              <SortingVisualizer></SortingVisualizer>
-            </div>
-          ) : (
-            <div> </div>
-          )}
-        </div>
-{/* For Pathfinding */}
+      <main className={classes.content}>
+        {/* <SortingVisualizer></SortingVisualizer> */}
+
+        <Toolbar />
+        {/* <Typography paragraph>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
+              facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+              gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
+              donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+              adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+              Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
+              imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
+              arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
+              donec massa sapien faucibus et molestie ac.
+            </Typography> */}
+        {/* 
+              <div classes={classes.sortingbars}> 
+
+                {openSorting ? <SortingVisualizer></SortingVisualizer> : <div> Hidden </div> }
+
+              </div> */}
+
+        <div > 
+
+                {chooseMergeSort ? 
+                <div>
+                <Typography> Merge Sort </Typography>
+                <SortingVisualizer></SortingVisualizer>
+                </div>
+                  : 
+                  <div>  </div> 
+                  }
+
+              </div>
+
         <div>
           {openPathfinding ? (
             <div>
               <Typography> Dijsktra </Typography>
-
+              {/* <SortingVisualizer></SortingVisualizer> */}
               <PathFindingVisualizer></PathFindingVisualizer>
             </div>
           ) : (
@@ -283,91 +283,71 @@ export default function PersistentDrawerLeft() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    // display: 'flex',
+  },
   appBar: {
+    zIndex: theme.zIndex.drawer + 1,
     background: "#2a3439",
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-
-    marginLeft: 0,
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
   },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    // paddingTop: "50px",
-    textAlign: "center",
-  },
   drawerTitle: {
     fontSize: "1",
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    background: "white",
   },
   drawerContainer: {
     overflow: "auto",
   },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
+  content: {
+    // flexGrow: 1,
+    padding: theme.spacing(3),
   },
-  drawerHeaderTitle: {
-    display: "flex",
-    flexDirection: "row",
-  },
-
-  grow: {
-    flexGrow: 1,
-  },
-  hide: {
-    display: "none",
-  },
-
   nested: {
     paddingLeft: theme.spacing(4),
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  root: {
-    display: "flex",
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
+  sortingbars: {
+    position: "relative",
+    paddingTop: 100,
   },
 }));
+
+
+<Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>

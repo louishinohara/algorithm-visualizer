@@ -3,9 +3,10 @@ import { getMergeSortAnimations } from "./sortingAlgorithms/mergeSort.js";
 import { Button } from "@material-ui/core";
 import MergeTypeIcon from "@material-ui/icons/MergeType";
 import Slider from "@material-ui/core/Slider";
+import Grid from "@material-ui/core/Grid";
 import ResizeDetector from "react-resize-detector";
 import "./SortingVisualizer.css";
-
+import Typography from "@material-ui/core/Typography";
 // This is the main color of the array bars.
 const PRIMARY_COLOR = "turquoise";
 
@@ -50,8 +51,8 @@ export default class SortingVisualizer extends React.Component {
       height: 0,
       barHeight: 0.85, // Changes the size of the height of the bars to scale page
       BAR_WIDTH: 4,
-      ANIMATION_SPEED_MS: 1,
-      NUMBER_OF_ARRAY_BARS: 100, // Change this value for the number of bars (value) in the array.
+      ANIMATION_SPEED_MS: 10,
+      NUMBER_OF_ARRAY_BARS: 180, // Change this value for the number of bars (value) in the array.
       MAX_NUMBER_OF_BARS: 175,
     };
   }
@@ -87,7 +88,7 @@ export default class SortingVisualizer extends React.Component {
   // Changes the max value of the slider depending on the width of the screen
   getDimensions(width, height) {
     // Changes the number of bars depending on the width of the screen
-    var MAX_NUMBER_OF_BARS = Math.floor(width / 6.5);
+    var MAX_NUMBER_OF_BARS = Math.floor(width / 5);
 
     // SETS THE MAX NUMBER OF BARS FOR THE PAGE
     this.setState({ MAX_NUMBER_OF_BARS });
@@ -144,6 +145,7 @@ export default class SortingVisualizer extends React.Component {
 
   render() {
     const { array } = this.state;
+
     // Ticks for the # of bars on the slider
     var bars = [
       {
@@ -173,77 +175,88 @@ export default class SortingVisualizer extends React.Component {
     ];
     // const classes = useStyles();
     return (
-      <div
-        style={{
-          paddingLeft: "250px",
-          paddingRight: "50px",
-        }}
-      >
-        <div className="array-container">
-          {array.map((value, idx) => (
-            <div
-              className="array-bar"
-              key={idx}
-              style={{
-                backgroundColor: PRIMARY_COLOR,
-                height: `${value * this.state.barHeight}px`,
-                width: `${this.state.BAR_WIDTH}px`,
-              }}
-            ></div>
-          ))}
-          <ResizeDetector
-            handleWidth
-            handleHeight
-            onResize={(width, height) => this.getDimensions(width, height)}
-            render={({ width, height }) => (
-              <div>
-                Width:{width}, Height:{height}
-              </div>
-            )}
-          />
-        </div>
-        <div className="menu-items">
-          {/* <button onClick={() => this.resetArray()}> Generate New Array </button>
-                    <button onClick={() => this.mergeSort()}> Merge Sort </button> */}
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ margin: 20 }}
-            size="large"
-            onClick={() => this.resetArray()}
-          >
-            Generate New Array
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ margin: 20 }}
-            size="large"
-            startIcon={<MergeTypeIcon />}
-            onClick={() => this.mergeSort()}
-          >
-            Merge Sort
-          </Button>
-          <Slider
-            defaultValue={this.state.NUMBER_OF_ARRAY_BARS}
-            min={0}
-            max={this.state.MAX_NUMBER_OF_BARS}
-            aria-labelledby="discrete-slider-always"
-            step={1}
-            onChange={(e, val) => this.changeBarCount(val)}
-            marks={bars}
-            valueLabelDisplay="on"
-          />
-          <Slider
-            defaultValue={this.state.ANIMATION_SPEED_MS}
-            max={100}
-            aria-labelledby="discrete-slider-always"
-            step={1}
-            onChange={(e, val) => this.changeSpeed(val)}
-            marks={speed}
-            valueLabelDisplay="on"
-          />
-        </div>
+      <div style={{ flexGrow: 1 }}>
+        <Grid>
+          <Grid item xs={12}>
+            <div className="array-container">
+              {array.map((value, idx) => (
+                <div
+                  className="array-bar"
+                  key={idx}
+                  style={{
+                    backgroundColor: PRIMARY_COLOR,
+                    height: `${value * this.state.barHeight}px`,
+                    width: `${this.state.BAR_WIDTH}px`,
+                  }}
+                ></div>
+              ))}
+              <ResizeDetector
+                handleWidth
+                handleHeight
+                onResize={(width, height) => this.getDimensions(width, height)}
+                render={({ width, height }) => (
+                  <div>
+                    Width:{width}, Height:{height}
+                  </div>
+                )}
+              />
+            </div>
+          </Grid>
+          <div className="menu-items">
+            <div>
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ margin: 20 }}
+                size="large"
+                onClick={() => this.resetArray()}
+              >
+                Generate New Array
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ margin: 20 }}
+                size="large"
+                // startIcon={<MergeTypeIcon />}
+                onClick={() => this.mergeSort()}
+              >
+                Sort Values
+              </Button>
+            </div>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <Typography style={{ paddingBottom: "50px" }}>
+                  Animation Speed
+                </Typography>
+                <Slider
+                  defaultValue={this.state.ANIMATION_SPEED_MS}
+                  max={100}
+                  aria-labelledby="discrete-slider-always"
+                  step={1}
+                  onChange={(e, val) => this.changeSpeed(val)}
+                  marks={speed}
+                  valueLabelDisplay="on"
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <Typography style={{ paddingBottom: "50px" }}>Number of Bars </Typography>
+                <Slider
+                  className="slider"
+                  defaultValue={this.state.NUMBER_OF_ARRAY_BARS}
+                  min={0}
+                  max={this.state.MAX_NUMBER_OF_BARS}
+                  aria-labelledby="discrete-slider-always"
+                  step={1}
+                  onChange={(e, val) => this.changeBarCount(val)}
+                  marks={bars}
+                  valueLabelDisplay="on"
+                />
+              </Grid>
+            </Grid>
+          </div>
+        </Grid>
       </div>
     );
   }

@@ -11,11 +11,11 @@ export default class NavigationController extends Component {
     return (
       <div>
        {/* <Header /> */}
-        <Grid container spacing={0}>
-          <Grid md={6} alignItems="center" justify="center">
+        <Grid container spacing={0} direction="row" justify="center" style={{flexGrow: 1}}>
+          <Grid item xs={12} md={6}>
             <MediaCard title={"Sorting Algorithms"} image={sortingImg}/>
           </Grid>
-          <Grid md={6} alignItems="center" justify="center">
+          <Grid item xs={12} md={6}>
             <MediaCard title={"Pathfinding Algorithms"} image={pathfindingimg}/>
           </Grid>
         </Grid>

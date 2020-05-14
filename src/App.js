@@ -4,24 +4,20 @@ import Grid from "@material-ui/core/Grid";
 import SortingVisualizer from "./Visualizer/SortingVisualizer/SortingVisualizer";
 import PathFindingVisualizer from "./Visualizer/PathFindingVisualizer/PathFindingVisualizer";
 import NavigationController from "./components/NavigationController";
-import Header from "./components/Header/Header";
+import Header from "./components/Header/Header1";
 import "./App.css";
 
 export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Grid container spacing={0} alignItems="center" justify="center">
-          <PersistentDrawerLeft />
-          <Grid >
-            {/* <Header /> */}
-          </Grid>
-          <Grid>
-            <NavigationController />
-          </Grid>
-        </Grid>
+        <PersistentDrawerLeft />
+        <Header />
+
+        <NavigationController />
+
         {/* <PathFindingVisualizer/>
-        {/* <SortingVisualizer/> */} 
+        {/* <SortingVisualizer/> */}
       </div>
     );
   }

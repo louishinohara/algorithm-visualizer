@@ -85,13 +85,13 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h5" noWrap>
             Algorithm Visualization
           </Typography>
           <div className={classes.grow} />
 
           <IconButton color="inherit" onClick={btnClick}>
-            <GitHubIcon style={{ fontSize: 30 }} />
+            <GitHubIcon style={{ fontSize: 35 }} />
           </IconButton>
         </Toolbar>
       </AppBar>

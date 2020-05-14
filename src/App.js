@@ -13,8 +13,8 @@ export default class App extends Component {
       <div className="App">
         <Grid container spacing={0} alignItems="center" justify="center">
           <PersistentDrawerLeft />
-          <Grid lg={12} justify="center">
-            <Header />
+          <Grid >
+            {/* <Header /> */}
           </Grid>
           <Grid>
             <NavigationController />

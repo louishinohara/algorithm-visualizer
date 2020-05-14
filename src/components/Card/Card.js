@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     backgroundColor: "#424242",
   },
   media: {
-    height: 450,     
+    height: 400,     
     width: '90%',
     margin: '5%'
   },

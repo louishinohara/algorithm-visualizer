@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Typist from "react-typist";
 import "./Header.css";
 
 export default class Header extends Component {

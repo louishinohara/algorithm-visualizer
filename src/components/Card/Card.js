@@ -1,14 +1,11 @@
 import React from "react";
 import {
-  Box,
   Grid,
   Typography,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
-  Button,
   makeStyles,
 } from "@material-ui/core";
 

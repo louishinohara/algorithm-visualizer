@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MediaCard from "./Card/Card";
-import {Grid, Button} from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import sortingImg from "../images/Sorting.png";
 import pathfindingimg from "../images/Pathfinding.png";
 
@@ -13,6 +13,13 @@ export default class NavigationController extends Component {
   }
 
   render() {
+    const selectSorting = () => {
+      console.log("a");
+    };
+
+    const selectPathFinding = () => {
+      console.log("a");
+    };
     return (
       <div>
         {/* <Header /> */}
@@ -24,25 +31,27 @@ export default class NavigationController extends Component {
           style={{ flexGrow: 1 }}
         >
           <Grid item xs={12} md={6}>
-            <MediaCard
-              title={"Sorting Algorithms"}
-              description={
-                "Insertion · Selection · Merge · Quick · Heap · Bubble · Radix "
-              }
-              image={sortingImg}
-            />
+            <Button onClick={selectSorting}>
+              <MediaCard
+                title={"Sorting Algorithms"}
+                description={
+                  "Insertion · Selection · Merge · Quick · Heap · Bubble · Radix "
+                }
+                image={sortingImg}
+              />
+            </Button>
           </Grid>
+
           <Grid item xs={12} md={6}>
-          
-          
-            <MediaCard
-              title={"Pathfinding Algorithms"}
-              description={
-                "Dijkstra · A-star · Depth First Search · Bredth First Search"
-              }
-              image={pathfindingimg}
-            />
-           
+            <Button onClick={selectPathFinding}>
+              <MediaCard
+                title={"Pathfinding Algorithms"}
+                description={
+                  "Dijkstra · A-star · Depth First Search · Bredth First Search · Best-First-Search"
+                }
+                image={pathfindingimg}
+              />
+            </Button>
           </Grid>
         </Grid>
       </div>

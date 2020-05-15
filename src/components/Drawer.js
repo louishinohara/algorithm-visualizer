@@ -1,20 +1,25 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  makeStyles,
+  useTheme,
+  Drawer,
+  IconButton,
+  Divider,
+  Typography,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from "@material-ui/core";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import MergeTypeIcon from "@material-ui/icons/MergeType";
 import BubbleChartIcon from "@material-ui/icons/BubbleChart";
 import TimerIcon from "@material-ui/icons/Timer";
@@ -23,9 +28,6 @@ import InsertLinkIcon from "@material-ui/icons/InsertLink";
 import ColorizeIcon from "@material-ui/icons/Colorize";
 import ExtensionIcon from "@material-ui/icons/Extension";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
-import Collapse from "@material-ui/core/Collapse";
-import SortingVisualizer from "../Visualizer/SortingVisualizer/SortingVisualizer";
-import PathFindingVisualizer from "../Visualizer/PathFindingVisualizer/PathFindingVisualizer";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
 const drawerWidth = 240;
@@ -52,6 +54,7 @@ export default function PersistentDrawerLeft() {
   };
 
   const selectMergeSort = () => {
+    console.log("a");
     setMergeSortButton(!chooseMergeSort);
   };
 
@@ -95,7 +98,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Toolbar /> 
+      <Toolbar />
 
       {/* ============================= START DRAWER ========================= */}
       <Drawer

@@ -1,4 +1,4 @@
-main {
+/* main {
     height: 10vh;
     width: 10vw;
     display: flex;
@@ -22,4 +22,8 @@ main {
     position: relative;
     padding: 0;
     margin: 0;
+  } */
+
+  .header-title {
+    color: 'white'
   }

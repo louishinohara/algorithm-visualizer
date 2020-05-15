@@ -1,54 +1,50 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
+import {
+  Box,
+  Grid,
+  Typography,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 655,
-    minWidth: 375,
-    // marginTop: "200px",
+    maxWidth: "auto",
+    // minWidth: 375,
     margin: "20px",
-    // marginTop: '100px',
     color: "#ffffff",
     backgroundColor: "#424242",
   },
   media: {
-    height: 400,     
-    width: '90%',
-    margin: '5%'
+    height: 375,
+    width: "90%",
+    margin: "5%",
   },
 });
 
-const MediaCard = props => {
+const MediaCard = (props) => {
   const classes = useStyles();
   return (
-    <Grid container justify="center" >
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={props.image}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-           {props.title}
-          </Typography>
-          <Typography variant="body2" color="#ffffff" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Grid container justify="center">
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia className={classes.media} image={props.image} />
+          <CardContent>
+            <Typography gutterBottom component="h2" variant="h4">
+              {props.title}
+            </Typography>
+            <Typography variant="h5" color="#ffffff" component="p">
+              {props.description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </Grid>
   );
-}
+};
 export default MediaCard;

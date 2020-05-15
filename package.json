@@ -16,6 +16,8 @@
     "react-flip-toolkit": "^7.0.9",
     "react-resize-detector": "^4.2.3",
     "react-scripts": "3.4.1",
+    "react-tappable": "^1.0.4",
+    "react-typist": "^2.0.5",
     "use-dencrypt-effect": "^1.0.2"
   },
   "scripts": {

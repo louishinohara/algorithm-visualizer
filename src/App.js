@@ -5,6 +5,8 @@ import Header from "./components/Header/Header1";
 import "./App.css";
 
 import SortingVisualizer from "./Visualizer/SortingVisualizer/SortingVisualizer";
+import PathfindingVisualizer from "./Visualizer/PathFindingVisualizer/PathFindingVisualizer";
+
 import { BrowserRouter, Route, Router, Link, Switch } from "react-router-dom";
 
 export default class App extends Component {
@@ -12,13 +14,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <Fragment>
-          <PersistentDrawerLeft />
           <BrowserRouter>
-          <Switch>
-            {/* <NavigationController /> */}
-            <Route exact path="/" component={NavigationController} />
-            <Route path="/sorting" component={SortingVisualizer} />
-          </Switch>
+            <PersistentDrawerLeft />
+            <Switch>
+              {/* <NavigationController /> */}
+              <Route exact path="/" component={NavigationController} />
+              <Route path="/sorting" component={SortingVisualizer} />
+              <Route path="/pathfinding" component={PathfindingVisualizer} />
+            </Switch>
           </BrowserRouter>
         </Fragment>
       </div>

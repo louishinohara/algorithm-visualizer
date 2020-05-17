@@ -4,7 +4,10 @@ import { Grid, Button } from "@material-ui/core";
 import sortingImg from "../images/Sorting.png";
 import pathfindingimg from "../images/Pathfinding.png";
 import Header from "./Header/Header1";
+
 import SortingVisualizer from "../Visualizer/SortingVisualizer/SortingVisualizer";
+import PathfindingVisualizer from "../Visualizer/PathFindingVisualizer/PathFindingVisualizer";
+
 import { BrowserRouter, Route, Router, Link, Switch } from "react-router-dom";
 
 export default class NavigationController extends Component {
@@ -23,6 +26,7 @@ export default class NavigationController extends Component {
     const selectPathFinding = () => {
       console.log("a");
     };
+
     return (
       <div>
         <Header />
@@ -36,25 +40,33 @@ export default class NavigationController extends Component {
         >
           <Grid item xs={12} md={6}>
             <Button onClick={selectSorting}>
-              <MediaCard
-                title={"Sorting Algorithms"}
-                description={
-                  "Insertion · Selection · Merge · Quick · Heap · Bubble · Radix "
-                }
-                image={sortingImg}
-              />
+              <div>
+                <a href="/sorting">
+                  <MediaCard
+                    title={"Sorting Algorithms"}
+                    description={
+                      "Insertion · Selection · Merge · Quick · Heap · Bubble · Radix "
+                    }
+                    image={sortingImg}
+                  />
+                </a>
+              </div>
             </Button>
           </Grid>
 
           <Grid item xs={12} md={6}>
             <Button onClick={selectPathFinding}>
-              <MediaCard
-                title={"Pathfinding Algorithms"}
-                description={
-                  "Dijkstra · A-star · Depth First Search · Bredth First Search · Best-First-Search"
-                }
-                image={pathfindingimg}
-              />
+              <div>
+                <a href="/pathfinding">
+                  <MediaCard
+                    title={"Pathfinding Algorithms"}
+                    description={
+                      "Dijkstra · A-star · Depth First Search · Bredth First Search · Best-First-Search"
+                    }
+                    image={pathfindingimg}
+                  />
+                </a>
+              </div>
             </Button>
           </Grid>
         </Grid>

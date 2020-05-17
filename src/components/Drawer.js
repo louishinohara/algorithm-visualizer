@@ -17,6 +17,8 @@ import {
   Collapse,
 } from "@material-ui/core";
 
+import {Link} from "react-router-dom";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -89,7 +91,11 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" noWrap>
-            Algorithm Visualization
+            <div>
+              <Link to="/" style={{ textDecoration: 'none !important' }}>
+                Algorithm Visualization
+              </Link>
+            </div>
           </Typography>
           <div className={classes.grow} />
 
@@ -127,7 +133,11 @@ export default function PersistentDrawerLeft() {
             <ListItemText
               disableTypography
               primary={
-                <Typography className={classes.drawerText}>Sorting</Typography>
+                <Typography className={classes.drawerText}>
+                  <a href="/sorting" style={{ textDecoration: 'none' }}>
+                    Sorting{" "}
+                  </a>
+                </Typography>
               }
             />
           </ListItem>
@@ -158,6 +168,7 @@ export default function PersistentDrawerLeft() {
                 <ListItemIcon>
                   <MergeTypeIcon />
                 </ListItemIcon>
+
                 <ListItemText primary="Merge Sort" />
               </ListItem>
 
@@ -302,7 +313,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-
+  a: {
+    textDecoration: "none",
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),

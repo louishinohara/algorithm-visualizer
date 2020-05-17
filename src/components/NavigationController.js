@@ -3,6 +3,9 @@ import MediaCard from "./Card/Card";
 import { Grid, Button } from "@material-ui/core";
 import sortingImg from "../images/Sorting.png";
 import pathfindingimg from "../images/Pathfinding.png";
+import Header from "./Header/Header1";
+import SortingVisualizer from "../Visualizer/SortingVisualizer/SortingVisualizer";
+import { BrowserRouter, Route, Router, Link, Switch } from "react-router-dom";
 
 export default class NavigationController extends Component {
   constructor(props) {
@@ -22,7 +25,8 @@ export default class NavigationController extends Component {
     };
     return (
       <div>
-        {/* <Header /> */}
+        <Header />
+
         <Grid
           container
           spacing={0}

@@ -3,7 +3,7 @@ import MediaCard from "./Card/Card";
 import { Grid, Button } from "@material-ui/core";
 import sortingImg from "../images/Sorting.png";
 import pathfindingimg from "../images/Pathfinding.png";
-import Header from "./Header/Header1";
+import Header from "./Header/MainHeader";
 
 import SortingVisualizer from "../Visualizer/SortingVisualizer/SortingVisualizer";
 import PathfindingVisualizer from "../Visualizer/PathFindingVisualizer/PathFindingVisualizer";

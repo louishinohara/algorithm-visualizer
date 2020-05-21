@@ -1,3 +1,7 @@
+.body {
+  color: red;
+}
+
 .array-container {
   position: relative;
   top: 115px;
@@ -13,6 +17,3 @@
   top: 115px;
 }
 
-/* .slider {
-  padding-left: 500px;
-} */

@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PersistentDrawerLeft from "./components/Drawer";
 import NavigationController from "./components/NavigationController";
-import Header from "./components/Header/Header1";
+import Header from "./components/Header/MainHeader";
+import SortingHeader from "./components/Header/SortingHeader";
 import "./App.css";
 
 import SortingVisualizer from "./Visualizer/SortingVisualizer/SortingVisualizer";

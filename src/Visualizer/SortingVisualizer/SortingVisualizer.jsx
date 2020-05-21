@@ -1,4 +1,5 @@
 import React from "react";
+import SortingHeader from '../../components/Header/SortingHeader';
 import { getMergeSortAnimations } from "./sortingAlgorithms/mergeSort.js";
 import { Button } from "@material-ui/core";
 import MergeTypeIcon from "@material-ui/icons/MergeType";
@@ -175,7 +176,8 @@ export default class SortingVisualizer extends React.Component {
     ];
     // const classes = useStyles();
     return (
-      <div style={{ flexGrow: 1 }}>
+      <div className="body" style={{ flexGrow: 1 }}>
+      <SortingHeader />
         <Grid>
           <Grid item xs={12}>
             <div className="array-container">

@@ -177,8 +177,9 @@ export default class SortingVisualizer extends React.Component {
     // const classes = useStyles();
     return (
       <div className="body" style={{ flexGrow: 1 }}>
-      <SortingHeader />
+      
         <Grid>
+        <SortingHeader item xs={12} />
           <Grid item xs={12}>
             <div className="array-container">
               {array.map((value, idx) => (

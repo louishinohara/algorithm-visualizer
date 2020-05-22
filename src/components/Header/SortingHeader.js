@@ -53,8 +53,7 @@ export default function SortingHeader() {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="row" justify="center" style={{ flexGrow: 1 }}>
-        <Grid item xs={12}>
+
           <Typography
             variant="h2"
             style={{
@@ -67,13 +66,9 @@ export default function SortingHeader() {
           >
             Sorting Algorithms
           </Typography>
-        </Grid>
-      </Grid>
 
-      <Grid container direction="row" justify="center" style={{ flexGrow: 1 }}>
-        <Grid item xs={12}>
-          <AppBar position="static" color="transparent">
-            <TabPanel value={value} index={0}>
+          {/* <AppBar position="static" color="transparent"> */}
+            {/* <TabPanel value={value} index={0}>
               Insertion Sort
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -90,7 +85,7 @@ export default function SortingHeader() {
             </TabPanel>
             <TabPanel value={value} index={5}>
               Bubble Sort
-            </TabPanel>
+            </TabPanel> */}
             <Tabs
               centered
               value={value}
@@ -108,9 +103,7 @@ export default function SortingHeader() {
               <Tab label="Heap Sort" {...a11yProps(4)} />
               <Tab label="Bubble Sort" {...a11yProps(5)} />
             </Tabs>
-          </AppBar>
-        </Grid>
-      </Grid>
+          {/* </AppBar> */}
     </div>
   );
 }
